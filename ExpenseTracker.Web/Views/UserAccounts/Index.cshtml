@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ExpenseTracker.Domain.Models.Entities.UserAccount>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <!--PAGE TITLE-->
+    <div class="col-lg-6 offset-3">
+        <div class="card shadow-sm mb-1">
+            <div class="card-body">
+                <div class="display-6">User List</div>
+
+                <!--ALERT-->
+                @if (TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <i class="bi bi-check-circle-fill"></i>&nbsp;@TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+                <hr />
+                <p>
+                    <!--CREATE USER ACCOUNT-->
+                    <a asp-controller="UserAccounts" asp-action="Create" class="btn btn-sm btn-secondary">Create Account</a>
+                </p>
+                <hr />
+
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th width="40%">@Html.DisplayNameFor(model => model.Name)</th>
+                            <th width="10%">@Html.DisplayNameFor(model => model.DOB)</th>
+                            <th width="10%">@Html.DisplayNameFor(model => model.Gender)</th>
+                            <th width="40%">@Html.DisplayNameFor(model => model.Email)</th>                            
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                <td>@Html.DisplayFor(modelItem => item.DOB)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <a asp-controller="UserAccounts" asp-action="Edit" asp-route-id="@item.UserAccountID" class="btn btn-sm btn-secondary">Edit</a>
+                                    <a asp-controller="UserAccounts" asp-action="Details" asp-route-id="@item.UserAccountID" class="btn btn-sm btn-secondary">View</a>
+                                    <hr>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+﻿@model ExpenseTracker.Domain.Models.Entities.ExpenseCategory
+
+@{
+   ViewData["Title"] = "Details";
+}
+
+@if (TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey] != null)
+{
+   <div class="alert alert-success">
+      @TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey]
+   </div>
+}
+
+<h4>@Html.DisplayFor(model => model.CategoryName)</h4>
+<hr />
+
+<div>
+   <dl class="row">
+      <dt class="col-sm-2">@Html.DisplayNameFor(model => model.CategoryName)</dt>
+      <dd class="col-sm-10">@Html.DisplayFor(model => model.CategoryName)</dd>           
+   </dl>
+</div>
+
+<div>
+   <a asp-controller="Category" asp-action="Index" class="btn btn-dark">Finish</a>
+</div>

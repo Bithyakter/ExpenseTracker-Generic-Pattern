@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ExpenseTracker.Domain.Models.Entities.ExpenseCategory>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <!--PAGE TITLE-->
+    <div class="col-lg-6 offset-3">
+        <div class="card shadow-sm mb-1">
+            <div class="card-body">
+                <div class="display-6">Expense Category List</div>
+
+                <!--ALERT-->
+                @if (TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <i class="bi bi-check-circle-fill"></i>&nbsp;@TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+                <hr />
+                <p>
+                   <!--CREATE NEW EXPENSE CATEGORY-->
+                   <a asp-controller="Category" asp-action="Create" class="btn btn-sm btn-secondary">Create Category</a>
+                </p>
+                <hr />
+
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th width="40%">@Html.DisplayNameFor(model => model.CategoryName)</th>                           
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <a asp-controller="Category" asp-action="Edit" asp-route-id="@item.ExpenseCategoryID" class="btn btn-sm btn-secondary">Edit</a>
+                                    <a asp-controller="Category" asp-action="Details" asp-route-id="@item.ExpenseCategoryID" class="btn btn-sm btn-secondary">View</a>
+                                    <hr>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

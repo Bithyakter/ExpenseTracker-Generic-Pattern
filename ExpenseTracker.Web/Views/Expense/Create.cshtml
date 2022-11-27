@@ -1,0 +1,68 @@
+﻿@model ExpenseTracker.Domain.Models.Entities.Expense
+
+@{
+   ViewData["Title"] = "Create";
+}
+
+<h1>Create Expense</h1>
+<hr />
+
+<div class="row">
+   <div class="col-md-4">
+      <form asp-action="Create">
+         @Html.AntiForgeryToken()
+
+         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+         <!--ExpenseDate-->
+         <div class="form-group">
+            <label asp-for="ExpenseDate" class="control-label"></label>
+            <input asp-for="ExpenseDate" id="dob" type="text" class="form-control" />
+            <span asp-validation-for="ExpenseDate" class="text-danger"></span>
+         </div>
+
+         <!--Amount-->
+         <div class="form-group mt-1">
+            <label asp-for="Amount" class="control-label"></label>
+            <input asp-for="Amount" class="form-control" id="dob" type="text" />
+            <span asp-validation-for="Amount" class="text-danger"></span>
+         </div>
+
+         <!--ExpenseCatagory-->
+         <div class="form-group mt-1">
+            <label asp-for="ExpenseCatagoryID" class="control-label"></label>
+            <select asp-for="ExpenseCatagoryID" asp-items=ViewBag.category class="form-select">
+               <option value="0">Select</option>
+            </select>
+            <span asp-validation-for="ExpenseCatagoryID" class="text-danger"></span>
+         </div>
+
+         <div class="form-group mt-2">
+            <input type="submit" value="Save" class="btn btn-dark" />
+            &nbsp;
+            <a asp-action="Index" class="btn btn-outline-dark">Close</a>
+         </div>
+      </form>
+   </div>
+</div>
+
+<div>
+</div>
+
+@section Scripts {
+   @{
+      await Html.RenderPartialAsync("_ValidationScriptsPartial");
+   }
+
+   <script type="text/javascript">
+      $(document).ready(function () {
+          $("#dob").datepicker({
+              locale: "en-GB",
+              dateFormat: "dd/mm/yy",
+              changeMonth: true,
+              changeYear: true,
+              yearRange: "-90:+05"
+          });
+      });
+   </script>
+}

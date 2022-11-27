@@ -1,0 +1,87 @@
+﻿@model ExpenseTracker.Domain.Models.Entities.UserAccount
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row">
+    <div class="col-lg-6 offset-3">
+        <div class="card shadow-sm mb-1">
+            <div class="card-body ps-5 pe-5">
+                <div class="display-6">Create User Account</div>
+                <hr />
+
+                <form asp-action="Create">
+                    @Html.AntiForgeryToken()
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <!--NAME-->
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <!--DOB-->
+                    <div class="form-group mt-1">
+                        <label asp-for="DOB" class="control-label"></label>
+                        <input asp-for="DOB" class="form-control" id="dob" type="text" />
+                        <span asp-validation-for="DOB" class="text-danger"></span>
+                    </div>
+
+                    <!--GENDER-->
+                    <div class="form-group mt-1">
+                        <label asp-for="Gender" class="control-label"></label>
+                        <select asp-for="Gender" asp-items="Html.GetEnumSelectList<ExpenseTracker.Utilities.Constants.Enums.Gender>()" class="form-control">
+                            <option value="0">Select</option>
+                        </select>
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+
+                    <!--EMAIL-->
+                    <div class="form-group mt-1">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <!--PASSWORD-->
+                    <div class="form-group mt-1">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <!--CONFIRM PASSWORD-->
+                    <div class="form-group mt-1">
+                        <label asp-for="ConfirmPassword" class="control-label"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-2 mb-2">
+                        <input type="submit" value="Save" class="btn btn-dark" />                        
+                        <a asp-action="Index" class="btn btn-secondary">Close</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#dob").datepicker({
+                locale: "en-GB",
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-90:+05"
+            });
+        });
+    </script>
+}

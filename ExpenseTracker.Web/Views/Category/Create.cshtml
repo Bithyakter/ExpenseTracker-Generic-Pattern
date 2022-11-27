@@ -1,0 +1,31 @@
+﻿@model ExpenseTracker.Domain.Models.Entities.ExpenseCategory
+
+@{
+   ViewData["Title"] = "Create";
+}
+
+<h1>Create Expense Category</h1>
+<hr />
+
+<div class="row">
+   <div class="col-md-6">
+      <form asp-action="Create">
+         @Html.AntiForgeryToken()
+
+         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+         <!--CATEGORY NAME-->
+         <div class="form-group">
+            <label asp-for="CategoryName" class="control-label"></label>
+            <input asp-for="CategoryName" class="form-control" />
+            <span asp-validation-for="CategoryName" class="text-danger"></span>
+         </div>
+
+         <div class="form-group mt-2">
+            <input type="submit" value="Save" class="btn btn-dark" />
+            &nbsp;
+            <a asp-action="Index" class="btn btn-outline-dark">Close</a>
+         </div>
+      </form>
+   </div>
+</div>
