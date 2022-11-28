@@ -2,6 +2,8 @@
 using ExpenseTracker.Infrastructure.Contracts;
 using ExpenseTracker.Utilities.Constants;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Api.Controllers
 {
@@ -25,8 +27,12 @@ namespace ExpenseTracker.Api.Controllers
       {
          try
          {
-            if (await IsExpenseDuplicate(expense) == true)
-               return StatusCode(StatusCodes.Status400BadRequest, MessageConstants.DuplicateUserAccountError);
+            //if (await IsExpenseDuplicate(expense) == true)
+            //   return StatusCode(StatusCodes.Status400BadRequest, MessageConstants.DuplicateUserAccountError);
+            
+            expense.DateModified = DateTime.Now;
+            expense.IsRowDeleted = false;
+            expense.IsSynced = false;
 
             context.ExpenseRepository.Add(expense);
             await context.SaveChangesAsync();
@@ -49,6 +55,8 @@ namespace ExpenseTracker.Api.Controllers
          try
          {
             var expenses = await context.ExpenseRepository.GetAllActiveExpenses();
+            //var expenses = await context.ExpenseRepository.GetAll("ExpenseCategory").ToListAsync();
+            
             return Ok(expenses);
          }
          catch (Exception ex)

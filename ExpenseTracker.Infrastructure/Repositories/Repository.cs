@@ -41,6 +41,15 @@ namespace ExpenseTracker.Infrastructure.Repositories
          }
       }
 
+      IQueryable<T> IRepository<T>.GetAll(string include)
+      {
+         var entity = context.Set<T>()
+            .Include(include)
+            .AsNoTracking();
+
+         return entity;
+      }
+
       public virtual IEnumerable<T> GetAll()
       {
          try
@@ -56,6 +65,21 @@ namespace ExpenseTracker.Infrastructure.Repositories
          }
       }
 
+      //public virtual IEnumerable<T> GetAllInclude(string value)
+      //{
+      //   try
+      //   {
+      //      return context.Set<T>().Include(value)
+      //          .AsQueryable()
+      //          .AsNoTracking()
+      //          .ToList();
+      //   }
+      //   catch
+      //   {
+      //      throw;
+      //   }
+      //}
+
       public virtual async Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate)
       {
          try
@@ -64,6 +88,40 @@ namespace ExpenseTracker.Infrastructure.Repositories
                 .AsQueryable()
                 .AsNoTracking()
                 .Where(predicate)
+                .ToListAsync();
+         }
+         catch
+         {
+            throw;
+         }
+      }
+
+      public virtual async Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> obj)
+      {
+         try
+         {
+            return await context.Set<T>()
+                .AsQueryable()
+                .AsNoTracking()
+                .Where(predicate)
+                .Include(obj)
+                .ToListAsync();
+         }
+         catch
+         {
+            throw;
+         }
+      }
+
+      public virtual async Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> order, Expression<Func<T, object>> obj)
+      {
+         try
+         {
+            return await context.Set<T>()
+                .AsQueryable()
+                .Where(predicate)
+                .OrderByDescending(order)
+                .Include(obj)
                 .ToListAsync();
          }
          catch

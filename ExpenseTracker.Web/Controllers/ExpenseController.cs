@@ -8,6 +8,11 @@ namespace ExpenseTracker.Web.Controllers
 {
    public class ExpenseController : Controller
    {
+      public ExpenseController()
+      {
+
+      }
+
       public async Task<IActionResult> Index()
       {
          try
@@ -38,10 +43,15 @@ namespace ExpenseTracker.Web.Controllers
          try
          {
             HttpHelper<Expense> httpHelper = new HttpHelper<Expense>();
-            var outcome = await httpHelper.ReadSingleResource("expense-tracker-api/expense/key/" + id.ToString());
+            HttpHelper<ExpenseCategory> httpHelper1 = new HttpHelper<ExpenseCategory>();
+            
+            var outcome = await httpHelper.ReadSingleResource("expense-tracker-api/expense/key/" + id.ToString());   
 
             if (outcome.ActionStatus == Status.Failed)
                TempData[MessageConstants.MessageKey] = outcome.Message;
+
+            var Category = await httpHelper1.ReadSingleResource("expense-tracker-api/category/key/" + id.ToString());
+            Category.Entity = Category == null ? new ExpenseCategory() : Category.Entity;
 
             return View(outcome.Entity);
          }
@@ -59,7 +69,7 @@ namespace ExpenseTracker.Web.Controllers
             HttpHelper<ExpenseCategory> httpHelper = new HttpHelper<ExpenseCategory>();
             var categories = await httpHelper.ReadResourceList("expense-tracker-api/categories");
 
-            ViewData["category"] = new SelectList(categories.EntityList, "ExpenseCategoryID", "CategoryName");
+            ViewData["ExpenseCategoryID"] = new SelectList(categories.EntityList, "ExpenseCategoryID", "CategoryName");
          }
          catch (Exception)
          {
@@ -82,7 +92,7 @@ namespace ExpenseTracker.Web.Controllers
                expense.IsSynced = false;
 
                HttpHelper<Expense> httpHelper = new HttpHelper<Expense>();
-               var outcome = await httpHelper.CreateResource("expense-tracker-api/expense", expense);
+               var outcome = await httpHelper.CreateResource("expense-tracker-api/expense", expense);              
 
                if (outcome.ActionStatus == Status.Success)
                {
@@ -112,9 +122,13 @@ namespace ExpenseTracker.Web.Controllers
             HttpHelper<Expense> httpHelper = new HttpHelper<Expense>();
             var outcome = await httpHelper.ReadSingleResource("expense-tracker-api/expense/key/" + id.ToString());
 
+            HttpHelper<ExpenseCategory> httpHelper1 = new HttpHelper<ExpenseCategory>();
+            var categories = await httpHelper1.ReadResourceList("expense-tracker-api/category/key/" + id.ToString());           
+
             if (outcome.ActionStatus == Status.Failed)
                return NotFound();
 
+            ViewData["category"] = new SelectList(categories.EntityList, "ExpenseCategoryID", "CategoryName");
             return View(outcome.Entity);
          }
          catch (Exception)

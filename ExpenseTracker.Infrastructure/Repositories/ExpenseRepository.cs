@@ -37,14 +37,15 @@ namespace ExpenseTracker.Infrastructure.Repositories
       {
          try
          {
-            return await QueryAsync(u => u.IsRowDeleted == false);
+           //return await QueryAsync(u => u.IsRowDeleted == false);
+            return await QueryAsync(u => u.IsRowDeleted == false, o => o.ExpenseID, i => i.ExpenseCategory);
          }
          catch (Exception)
          {
             throw;
          }
       }
-
+   
       public async Task<IEnumerable<Expense>> GetExpenseByCategory(int categoryId)
       {
          try

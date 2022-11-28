@@ -28,12 +28,22 @@ namespace ExpenseTracker.Infrastructure.Contracts
       /// <returns>List of objects.</returns>
       IEnumerable<T> GetAll();
 
+      IQueryable<T> GetAll(string Include);
+
       /// <summary>
       /// Returns matched rows as a list of objects.
       /// </summary>
       /// <param name="predicate">Custom LINQ expression.</param>
       /// <returns>List of objects.</returns>
       Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate);
+
+      /// <summary>
+      /// Returns matched rows as a list of objects.
+      /// </summary>
+      /// <param name="predicate"></param>
+      /// <param name="obj"></param>
+      /// <returns></returns>
+      Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> obj);
 
       /// <summary>
       /// Returns first matched row as an object from the table.
