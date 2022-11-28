@@ -1,62 +1,110 @@
-﻿@model IEnumerable<ExpenseTracker.Domain.Models.Entities.UserAccount>
+﻿
+@model IEnumerable<ExpenseTracker.Domain.Models.Entities.UserAccount>
 
 @{
-    ViewData["Title"] = "Index";
+   ViewData["Title"] = "Index";
+   Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="row">
-    <!--PAGE TITLE-->
-    <div class="col-lg-6 offset-3">
-        <div class="card shadow-sm mb-1">
-            <div class="card-body">
-                <div class="display-6">User List</div>
+   <div class="col-lg-9 offset-lg-2">
+      <!--PAGE TITLE-->
+      <div class="display-6">User Accounts List</div>
+      <hr />
 
-                <!--ALERT-->
-                @if (TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey] != null)
-                {
-                    <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <i class="bi bi-check-circle-fill"></i>&nbsp;@TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey]
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                }
+      <!--ALERT-->
+      @if (TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey] != null)
+      {
+         <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+            <i class="bi bi-check-circle-fill"></i>&nbsp;@TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+         </div>
+      }
 
-                <hr />
-                <p>
-                    <!--CREATE USER ACCOUNT-->
-                    <a asp-controller="UserAccounts" asp-action="Create" class="btn btn-sm btn-secondary">Create Account</a>
-                </p>
-                <hr />
-
-                <table class="table table-borderless">
-                    <thead>
-                        <tr>
-                            <th width="40%">@Html.DisplayNameFor(model => model.Name)</th>
-                            <th width="10%">@Html.DisplayNameFor(model => model.DOB)</th>
-                            <th width="10%">@Html.DisplayNameFor(model => model.Gender)</th>
-                            <th width="40%">@Html.DisplayNameFor(model => model.Email)</th>                            
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                                <td>@Html.DisplayFor(modelItem => item.DOB)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Gender)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                            </tr>
-                            <tr>
-                                <td colspan="4">
-                                    <a asp-controller="UserAccounts" asp-action="Edit" asp-route-id="@item.UserAccountID" class="btn btn-sm btn-secondary">Edit</a>
-                                    <a asp-controller="UserAccounts" asp-action="Details" asp-route-id="@item.UserAccountID" class="btn btn-sm btn-secondary">View</a>
-                                    <hr>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+      <!--USER-ACCOUNT-->
+      <div class="card shadow-sm mb-1">
+         <div class="card-body">
+            <div class="row">
+               <!--CREATE NEW USER ACCOUNT-->
+               <div>
+                  <a asp-action="Create" asp-controller="UserAccounts" class="btn btn-dark btn-sm float-start">
+                     <i class="bi bi-plus-circle"></i>&nbsp;&nbsp;Create User
+                  </a>
+               </div>
             </div>
-        </div>
-    </div>
+
+            <!--TABLE-->
+            <table class="table mt-2">
+               <thead>
+                  <tr>
+                     <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                     </th>
+                     <th>
+                        @Html.DisplayNameFor(model => model.Gender)
+                     </th>
+                     <th>
+                        Date of Birth
+                     </th>
+                     <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                     </th>
+                     <th>
+                        @Html.DisplayNameFor(model => model.Password)
+                     </th>
+                     <th></th>
+                  </tr>
+               </thead>
+
+               <tbody>
+                  @foreach (var item in Model)
+                  {
+                     <tr>
+                        <td>
+                           @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                           @Html.DisplayFor(modelItem => item.Gender)
+                        </td>
+                        <td>
+                           @Html.DisplayFor(modelItem => item.DOB)
+                        </td>
+                        <td>
+                           @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                           @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+
+                        <!--ACTION-->
+                        <td>
+                           <!--EDIT-->
+                           <a asp-controller="UserAccounts" asp-action="Edit" asp-route-id="@item.UserAccountID" class="btn btn-sm btn-outline-dark ">
+                              <i class="bi bi-pencil-square"></i>&nbsp;Edit
+                           </a>
+
+                           @* <!--DELETE-->
+                        <a asp-action="Delete" asp-route-id="@item.OID" class="btn btn-sm btn-outline-danger ">
+                        <i class="bi bi-trash"></i>&nbsp;Delete
+                        </a>*@
+
+                           <!--VIEW-->
+                           <a asp-controller="UserAccounts" asp-action="Details" asp-route-id="@item.UserAccountID" class="btn btn-sm btn-outline-success">
+                              &nbsp;View
+                           </a>
+                        </td>
+                     </tr>
+                  }
+               </tbody>
+            </table>
+         </div>
+      </div>
+
+   </div>
 </div>
+
+<script type="text/javascript">
+   window.setTimeout(function () {
+       $('#alert').fadeOut('fast');
+   }, 2000);
+</script>

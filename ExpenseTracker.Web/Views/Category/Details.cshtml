@@ -2,27 +2,45 @@
 
 @{
    ViewData["Title"] = "Details";
+   Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<!--ALERT-->
-@if (TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey] != null)
-{
-   <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <i class="bi bi-check-circle-fill"></i>&nbsp;@TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey]
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div class="row">
+   <div class="col-lg-6 offset-lg-3">
+      <!--PAGE TITLE-->
+      <h4>Category Details</h4>
+
+      @*<h5>@Html.DisplayFor(model => model.CategoryName)</h5>*@
+
+      <hr />
+
+      <!--ALERT-->
+      @if (TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey] != null)
+      {
+         <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill"></i>&nbsp;@TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+         </div>
+      }
+
+      <div class="card shadow-sm mb-1">
+         <div class="card-body">
+            <div class="row">
+
+               <div>
+                  <dl class="row">
+                     <dt class="col-sm-5">@Html.DisplayNameFor(model => model.CategoryName) :</dt>
+                     <dd class="col-sm-5">@Html.DisplayFor(model => model.CategoryName)</dd>
+                  </dl>
+               </div>
+               
+               <div class="text-center mt-2">
+                  <a asp-controller="Category" asp-action="Index" class="btn btn-dark">Finish</a>
+               </div>
+
+            </div>
+         </div>
+      </div>
+
    </div>
-}
-
-<h4>@Html.DisplayFor(model => model.CategoryName)</h4>
-<hr />
-
-<div>
-   <dl class="row">
-      <dt class="col-sm-2">@Html.DisplayNameFor(model => model.CategoryName)</dt>
-      <dd class="col-sm-10">@Html.DisplayFor(model => model.CategoryName)</dd>           
-   </dl>
-</div>
-
-<div>
-   <a asp-controller="Category" asp-action="Index" class="btn btn-dark">Finish</a>
 </div>

@@ -1,6 +1,6 @@
 ﻿@model ExpenseTracker.Domain.Models.Entities.ExpenseCategory
 
-@{
+@*@{
    ViewData["Title"] = "Edit";
 }
 
@@ -29,5 +29,51 @@
             <a asp-action="Index" class="btn btn-outline-dark">Close</a>
          </div>
       </form>
+   </div>
+</div>*@
+
+@{
+   ViewData["Title"] = "Create";
+   Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+   <div class="col-lg-6 offset-lg-3">
+      <!--PAGE TITLE-->
+      <div class="card-title display-6">Update Category</div>
+      <hr />
+
+      <!--CATEGORY-->
+      <div class="card shadow-sm mb-1">
+         <div class="card-body">
+            <form asp-action="Edit" asp-controller="Category" method="POST">
+               <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+               <input type="hidden" asp-for="ExpenseCategoryID" />
+
+               <div class="ps-2 pe-2">
+                  
+                  <!--CATEGORY NAME:-->
+                  <div class="row mb-2">
+                     <div class="d-grid">
+                        <label asp-for="CategoryName" class="form-label">Category Name</label>
+                        <input asp-for="CategoryName" type="text" name="CategoryName" class="form-control" />
+                        <span asp-validation-for="CategoryName" class="text-danger"></span>
+                     </div>
+
+                     <!--ACTION:-->
+                     <div class="mt-3 text-center">
+                        <button type="submit" class="btn btn-dark mx-1">
+                           <i class="bi bi-check-circle"></i>&nbsp;Save&nbsp;
+                        </button>
+
+                        <a asp-action="Index" asp-controller="Category" class="btn btn-outline-dark mx-1">
+                           <i class="bi bi-arrow-left-circle"></i>&nbsp;Back&nbsp;
+                        </a>
+                     </div>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
    </div>
 </div>

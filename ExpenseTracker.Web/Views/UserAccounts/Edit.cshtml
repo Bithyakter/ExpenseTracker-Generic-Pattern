@@ -1,5 +1,5 @@
 ﻿@model ExpenseTracker.Domain.Models.Entities.UserAccount
-
+@*
 @{
     ViewData["Title"] = "Edit";
 }
@@ -74,6 +74,90 @@
             </div>
         </div>        
     </div>
+</div>*@
+
+@{
+   ViewData["Title"] = "Create";
+   Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+   <div class="col-lg-6 offset-lg-3">
+      <!--PAGE TITLE-->
+      <div class="card-title display-6">Update User</div>
+      <hr />
+
+      <!--USER-->
+      <div class="card shadow-sm mb-1">
+         <div class="card-body">
+            <form asp-action="Create" asp-controller="Country" method="POST">
+               <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+               <input type="hidden" asp-for="UserAccountID" />
+
+               <div class="ps-2 pe-2">
+
+                  <!--NAME:-->
+                  <div class="row mb-2">
+                    
+                     <div class="d-grid">
+                        <label asp-for="Name" class="form-label">User Name</label>
+                        <input asp-for="Name" type="text" name="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                     </div>
+
+                     <!--GENDER:-->
+                     <div class="d-grid mt-2">                     
+                        <label asp-for="Gender" class="form-label"></label>
+                        <select asp-for="Gender" asp-items="Html.GetEnumSelectList<ExpenseTracker.Utilities.Constants.Enums.Gender>()" class="form-control">
+                           <option value="0">Select</option>
+                        </select>
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                     </div>
+
+                     <!--DOB:-->
+                     <div class="d-grid mt-2">
+                        <label asp-for="DOB" class="form-label"> Date of Birth</label>
+                        <input asp-for="DOB" id="dob" type="text" class="form-control" />
+                        <span asp-validation-for="DOB" class="text-danger"></span>
+                     </div>
+
+                     <!--EMAIL:-->
+                     <div class="d-grid mt-2">
+                        <label asp-for="Email" class="form-label">Email</label>
+                        <input asp-for="Email" type="text" name="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                     </div>
+
+                     <!--PASSWORD:-->
+                     <div class="d-grid mt-2">
+                        <label asp-for="Password" class="form-label">Password</label>
+                        <input asp-for="Password" type="text" name="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                     </div>
+
+                     <!--CONFIRM PASSWORD:-->
+                     <div class="d-grid mt-2">
+                        <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+                        <input asp-for="ConfirmPassword" type="text" name="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                     </div>
+
+                     <!--ACTION:-->
+                     <div class="mt-3 text-center">
+                        <button type="submit" class="btn btn-dark mx-2">
+                           <i class="bi bi-check-circle"></i>&nbsp;Save&nbsp;
+                        </button>
+
+                        <a asp-action="Index" asp-controller="UserAccounts" class="btn btn-outline-dark">
+                           <i class="bi bi-arrow-left-circle"></i>&nbsp;Back&nbsp;
+                        </a>
+                     </div>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
 </div>
 
 @section Scripts {

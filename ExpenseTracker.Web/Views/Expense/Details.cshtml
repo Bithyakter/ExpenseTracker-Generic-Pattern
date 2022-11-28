@@ -1,6 +1,7 @@
 ﻿@model ExpenseTracker.Domain.Models.Entities.Expense
 @{
    ViewData["Title"] = "Details";
+   Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <!--ALERT-->
@@ -12,22 +13,43 @@
    </div>
 }
 
-<h4>@Html.DisplayFor(model => model.ExpenseCategory.CategoryName)</h4>
-<hr />
+<div class="row">
+   <div class="col-lg-8 offset-lg-3">
 
-<div>
-   <dl class="row">
-      <dt class="col-sm-2">@Html.DisplayNameFor(model => model.ExpenseDate)</dt>
-      <dd class="col-sm-10">@Html.DisplayFor(model => model.ExpenseDate)</dd>
+      <!--PAGE TITLE-->
+      <h4>Expense Details</h4>
 
-      <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Amount)</dt>
-      <dd class="col-sm-10">@Html.DisplayFor(model => model.Amount)</dd>
+      @*<h5>@Html.DisplayFor(model => model.CategoryName)</h5>*@
 
-      <dt class="col-sm-2">@Html.DisplayNameFor(model => model.ExpenseCatagoryID)</dt>
-      <dd class="col-sm-10">@Html.DisplayFor(model => model.ExpenseCatagoryID)</dd>
-   </dl>
-</div>
+      <hr />
 
-<div>
-   <a asp-controller="Expense" asp-action="Index" class="btn btn-dark">Finish</a>
+      <div class="card shadow-sm mb-1">
+         <div class="card-body">
+            <div class="row">
+
+               <div>
+                  <dl class="row">
+                     <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ExpenseDate)</dt>
+                     <dd class="col-sm-1">:</dd>
+                     <dd class="col-sm-7">@Html.DisplayFor(model => model.ExpenseDate)</dd>
+
+                     <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Amount)</dt>
+                     <dd class="col-sm-1">:</dd>
+                     <dd class="col-sm-7">@Html.DisplayFor(model => model.Amount)</dd>
+
+                     <dt class="col-sm-4">Expense Catagory</dt>
+                     <dd class="col-sm-1">:</dd>
+                     <dd class="col-sm-7">@Html.DisplayFor(model => model.ExpenseCatagoryID)</dd>
+                  </dl>
+               </div>
+
+               <div class="text-center mt-2">
+                  <a asp-controller="Expense" asp-action="Index" class="btn btn-dark">Finish</a>
+               </div>
+
+            </div>
+         </div>
+      </div>
+
+   </div>
 </div>

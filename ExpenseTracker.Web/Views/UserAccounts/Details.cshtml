@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+   Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="row">
@@ -24,19 +25,23 @@
                 <div>
                     <dl class="row">
                         <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Name)</dt>
-                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Name)</dd>
+                        <dt class="col-sm-1">:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Name)</dd>
 
-                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.DOB)</dt>
-                        <dd class="col-sm-9">@Html.DisplayFor(model => model.DOB)</dd>
+                        <dt class="col-sm-3">Date of Birth</dt>
+                        <dt class="col-sm-1">:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.DOB)</dd>
 
                         <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Gender)</dt>
-                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Gender)</dd>
+                        <dt class="col-sm-1">:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Gender)</dd>
 
                         <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Email)</dt>
-                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Email)</dd>
+                        <dt class="col-sm-1">:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Email)</dd>
                     </dl>
 
-                    <div>
+                    <div class="mt-2 text-center">
                         <a asp-controller="UserAccounts" asp-action="Index" class="btn btn-dark">Finish</a>
                     </div>
                 </div>

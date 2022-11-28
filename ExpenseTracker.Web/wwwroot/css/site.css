@@ -1,4 +1,4 @@
-html {
+/*html {
   font-size: 14px;
 }
 
@@ -15,4 +15,53 @@ html {
 
 body {
   margin-bottom: 60px;
+}*/
+
+html {
+   font-size: 14px;
 }
+
+@media (min-width: 768px) {
+   html {
+      font-size: 16px;
+   }
+}
+
+html {
+   position: relative;
+   min-height: 100%;
+}
+
+body {
+   /*BACKGROUND COLOR:*/
+   background-color: #FAF9FA;
+   margin-bottom: 60px;
+}
+
+/*BOOTSTRAP OVERRIDE*/
+.form-control:focus {
+   border-color: #D47520;
+   box-shadow: inset 0 0 0 rgb(255, 100, 0), 0 0 1px rgb(255, 100, 0);
+}
+
+.fs-6 {
+   font-size: .80rem !important;
+}
+
+/*FOR FIX NAVBAR DROPDOWN MENU*/
+/*.navbar-collapse {
+    flex-grow: 0 !important;
+}*/
+
+/*FOR FIX FOOTER SECTION*/
+/*.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}
+
+.screenshot_remove {
+    color: cornflowerblue;
+}*/

@@ -2,51 +2,60 @@
 
 @{
    ViewData["Title"] = "Create";
+   Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Create Expense</h1>
-<hr />
-
 <div class="row">
-   <div class="col-md-4">
-      <form asp-action="Create">
-         @Html.AntiForgeryToken()
+   <div class="col-lg-6 offset-lg-3">
+      <!--PAGE TITLE-->
+      <div class="card-title display-6">Create Expense</div>
+      <hr />
 
-         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+      <!--EXPENSE-->
+      <div class="card shadow-sm mb-1">
+         <div class="card-body">
+            <form asp-action="Create" asp-controller="Country" method="POST">
+               <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+               <div class="ps-2 pe-2">
 
-         <!--ExpenseDate-->
-         <div class="form-group">
-            <label asp-for="ExpenseDate" class="control-label"></label>
-            <input asp-for="ExpenseDate" id="dob" type="text" class="form-control" />
-            <span asp-validation-for="ExpenseDate" class="text-danger"></span>
+                  <!--CATEGORY NAME:-->
+                  <div class="row mb-2">
+                     <div class="d-grid">
+                        <label class="form-label">Expense Category</label>
+                        <select asp-for="ExpenseCatagoryID" asp-items=ViewBag.category class="form-select">
+                           <option value="0">Select</option>
+                        </select>
+                        <span asp-validation-for="ExpenseCatagoryID" class="text-danger"></span>
+                     </div>
+
+                     <div class="d-grid mt-2">
+                        <label asp-for="Amount" class="form-label">Amount</label>
+                        <input asp-for="Amount" type="text" id="dob" name="Amount" class="form-control" />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                     </div>
+
+                     <div class="d-grid mt-2">
+                        <label asp-for="ExpenseDate" class="form-label">Expense Date</label>
+                        <input asp-for="ExpenseDate" id="dob" type="text" name="ExpenseDate" class="form-control" />
+                        <span asp-validation-for="ExpenseDate" class="text-danger"></span>
+                     </div>
+
+                     <!--ACTION:-->
+                     <div class="mt-3 text-center">
+                        <button type="submit" class="btn btn-dark mx-2">
+                           <i class="bi bi-check-circle"></i>&nbsp;Save&nbsp;
+                        </button>
+
+                        <a asp-action="Index" asp-controller="Expense" class="btn btn-outline-dark">
+                           <i class="bi bi-arrow-left-circle"></i>&nbsp;Back&nbsp;
+                        </a>
+                     </div>
+                  </div>
+               </div>
+            </form>
          </div>
-
-         <!--Amount-->
-         <div class="form-group mt-1">
-            <label asp-for="Amount" class="control-label"></label>
-            <input asp-for="Amount" class="form-control" id="dob" type="text" />
-            <span asp-validation-for="Amount" class="text-danger"></span>
-         </div>
-
-         <!--ExpenseCatagory-->
-         <div class="form-group mt-1">
-            <label class="control-label">Expense Category</label>
-            <select asp-for="ExpenseCatagoryID" asp-items=ViewBag.category class="form-select">
-               <option value="0">Select</option>
-            </select>
-            <span asp-validation-for="ExpenseCatagoryID" class="text-danger"></span>
-         </div>
-
-         <div class="form-group mt-2">
-            <input type="submit" value="Save" class="btn btn-dark" />
-            &nbsp;
-            <a asp-action="Index" class="btn btn-outline-dark">Close</a>
-         </div>
-      </form>
+      </div>
    </div>
-</div>
-
-<div>
 </div>
 
 @section Scripts {
