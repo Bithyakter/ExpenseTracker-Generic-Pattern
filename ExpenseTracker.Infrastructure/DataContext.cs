@@ -13,7 +13,7 @@ namespace ExpenseTracker.Infrastructure
 
       protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
       {
-         string connectionString = "Data Source=.; Initial Catalog=ExpenseTracker4; User Id=sa; Password=abcd123!";
+         string connectionString = "Data Source=.; Initial Catalog=ExpenseTracker; User Id=sa; Password=abcd123!";
          optionsBuilder.UseSqlServer(connectionString);
       }
    }

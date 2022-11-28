@@ -28,34 +28,37 @@ namespace ExpenseTracker.Infrastructure.Contracts
       /// <returns>List of objects.</returns>
       IEnumerable<T> GetAll();
 
-        /// <summary>
-        /// The method is used to get a list of data.
-        /// </summary>
-        /// <param name="predicate">Custom LINQ expression.</param>
-        /// <returns>Returns matched rows as a list of data.</returns>
-        Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> obj);
+      /// <summary>
+      /// The method is used to get a list of data.
+      /// </summary>
+      /// <param name="predicate">Custom LINQ expression.</param>
+      /// <returns>Returns matched rows as a list of data.</returns>
+      Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> obj);
 
-        /// <summary>
-        /// The method is used to get a list of data.
-        /// </summary>
-        /// <param name="predicate">Custom LINQ expression.</param>
-        /// <returns>Returns matched rows as a list of data.</returns>
-        Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> obj, Expression<Func<T, object>> next);
-        /// <summary>
-        /// Searches using the given criteria.
-        /// </summary>
-        /// <param name="predicate">Search criteria.</param>
-        /// <returns>Object list.</returns>
-        Task<IEnumerable<T>> IQueryAsync(Expression<Func<T, bool>> predicate);
-        /// <summary>
-        /// The method is used to get a list of data.
-        /// </summary>
-        /// <param name="predicate">Custom LINQ expression.</param>
-        /// <returns>Returns matched rows as a list of data.</returns>
-        Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate);
+      /// <summary>
+      /// The method is used to get a list of data.
+      /// </summary>
+      /// <param name="predicate">Custom LINQ expression.</param>
+      /// <returns>Returns matched rows as a list of data.</returns>
+      Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> obj, Expression<Func<T, object>> next);
+      
+      /// <summary>
+      /// Searches using the given criteria.
+      /// </summary>
+      /// <param name="predicate">Search criteria.</param>
+      /// <returns>Object list.</returns>
+      Task<IEnumerable<T>> IQueryAsync(Expression<Func<T, bool>> predicate);
+      
+      /// <summary>
+      /// The method is used to get a list of data.
+      /// </summary>
+      /// <param name="predicate">Custom LINQ expression.</param>
+      /// <returns>Returns matched rows as a list of data.</returns>
+      Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate);
 
-        IQueryable<T> GetAll(string Include);
-        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
+      IQueryable<T> GetAll(string Include);
+
+      Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
 
       /// <summary>
       /// Updates an existing row in the table.

@@ -112,8 +112,13 @@ namespace ExpenseTracker.Web.Controllers
             HttpHelper<Expense> httpHelper = new HttpHelper<Expense>();
             var outcome = await httpHelper.ReadSingleResource("expense-tracker-api/expense/key/" + id.ToString());
 
+            HttpHelper<ExpenseCategory> httpHelper1 = new HttpHelper<ExpenseCategory>();
+            var categories = await httpHelper1.ReadResourceList("expense-tracker-api/categories");
+
             if (outcome.ActionStatus == Status.Failed)
                return NotFound();
+
+            ViewData["category"] = new SelectList(categories.EntityList, "ExpenseCategoryID", "CategoryName");
 
             return View(outcome.Entity);
          }

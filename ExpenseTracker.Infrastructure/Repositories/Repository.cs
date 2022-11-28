@@ -56,88 +56,88 @@ namespace ExpenseTracker.Infrastructure.Repositories
          }
       }
 
-        /// <summary>
-        /// Returns matched rows as a list of objects.
-        /// </summary>
-        /// <param name="predicate">Custom LINQ expression.</param>
-        /// <returns>List of objects.</returns>
-        public async Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate)
-        {
-            try
-            {
-                return await context.Set<T>()
-                    .AsQueryable()
-                    .AsNoTracking()
-                    .Where(predicate)
-                    .ToListAsync();
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Returns matched rows as a list of objects.
-        /// </summary>
-        /// <param name="predicate">Custom LINQ expression.</param>
-        /// <returns>List of objects.</returns>
-        public virtual async Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> obj)
-        {
-            try
-            {
-                return await context.Set<T>()
-                    .AsQueryable()
-                    .Where(predicate)
-                    .Include(obj)
-                    .ToListAsync();
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Returns matched rows as a list of objects.
-        /// </summary>
-        /// <param name="predicate">Custom LINQ expression.</param>
-        /// <returns>List of objects.</returns>
-        public virtual async Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> obj, Expression<Func<T, object>> next)
-        {
-            try
-            {
-                return await context.Set<T>()
-                      .AsQueryable()
-                      .Where(predicate)
-                      .Include(obj)
-                      .Include(next)
-                      .ToListAsync();
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
-        public async Task<IEnumerable<T>> IQueryAsync(Expression<Func<T, bool>> predicate)
-        {
-            try
-            {
-                return await context.Set<T>()
-                 .AsNoTracking()
+      /// <summary>
+      /// Returns matched rows as a list of objects.
+      /// </summary>
+      /// <param name="predicate">Custom LINQ expression.</param>
+      /// <returns>List of objects.</returns>
+      public async Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate)
+      {
+         try
+         {
+            return await context.Set<T>()
                 .AsQueryable()
+                .AsNoTracking()
                 .Where(predicate)
                 .ToListAsync();
-            }
-            catch
-            {
-                throw;
-            }
+         }
+         catch
+         {
+            throw;
+         }
+      }
 
-        }
+      /// <summary>
+      /// Returns matched rows as a list of objects.
+      /// </summary>
+      /// <param name="predicate">Custom LINQ expression.</param>
+      /// <returns>List of objects.</returns>
+      public virtual async Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> obj)
+      {
+         try
+         {
+            return await context.Set<T>()
+                .AsQueryable()
+                .Where(predicate)
+                .Include(obj)
+                .ToListAsync();
+         }
+         catch
+         {
+            throw;
+         }
+      }
 
-        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
+      /// <summary>
+      /// Returns matched rows as a list of objects.
+      /// </summary>
+      /// <param name="predicate">Custom LINQ expression.</param>
+      /// <returns>List of objects.</returns>
+      public virtual async Task<IEnumerable<T>> QueryAsync(Expression<Func<T, bool>> predicate, Expression<Func<T, object>> obj, Expression<Func<T, object>> next)
+      {
+         try
+         {
+            return await context.Set<T>()
+                  .AsQueryable()
+                  .Where(predicate)
+                  .Include(obj)
+                  .Include(next)
+                  .ToListAsync();
+         }
+         catch
+         {
+            throw;
+         }
+      }
+
+      public async Task<IEnumerable<T>> IQueryAsync(Expression<Func<T, bool>> predicate)
+      {
+         try
+         {
+            return await context.Set<T>()
+             .AsNoTracking()
+            .AsQueryable()
+            .Where(predicate)
+            .ToListAsync();
+         }
+         catch
+         {
+            throw;
+         }
+
+      }
+
+      public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
       {
          try
          {
@@ -150,14 +150,14 @@ namespace ExpenseTracker.Infrastructure.Repositories
             throw;
          }
       }
-        IQueryable<T> IRepository<T>.GetAll(string Include)
-        {
-            var entity = context.Set<T>().Include(Include).AsNoTracking();
-            return entity;
-        }
 
+      IQueryable<T> IRepository<T>.GetAll(string Include)
+      {
+         var entity = context.Set<T>().Include(Include).AsNoTracking();
+         return entity;
+      }
 
-        public virtual void Update(T entity)
+      public virtual void Update(T entity)
       {
          try
          {

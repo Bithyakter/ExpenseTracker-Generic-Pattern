@@ -110,7 +110,7 @@ namespace ExpenseTracker.Api.Controllers
 
             expenseInDb.ExpenseDate = expense.ExpenseDate;
             expenseInDb.Amount = expense.Amount;
-            expenseInDb.ExpenseCategory = expense.ExpenseCategory;
+            expenseInDb.ExpenseCatagoryID = expense.ExpenseCatagoryID;
             expenseInDb.DateModified = expense.DateModified;
             expenseInDb.ModifiedBy = expense.ModifiedBy;
             expenseInDb.IsSynced = expense.IsSynced;
