@@ -14,7 +14,7 @@
       <!--EXPENSE-->
       <div class="card shadow-sm mb-1">
          <div class="card-body">
-            <form asp-action="Create" asp-controller="Country" method="POST">
+            <form asp-action="Create" asp-controller="Expense" method="POST">
                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                <div class="ps-2 pe-2">
 
@@ -30,7 +30,7 @@
 
                      <div class="d-grid mt-2">
                         <label asp-for="Amount" class="form-label">Amount</label>
-                        <input asp-for="Amount" type="text" id="dob" name="Amount" class="form-control" />
+                        <input asp-for="Amount" type="text" name="Amount" class="form-control" />
                         <span asp-validation-for="Amount" class="text-danger"></span>
                      </div>
 

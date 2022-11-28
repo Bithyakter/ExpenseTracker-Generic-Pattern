@@ -4,17 +4,17 @@
    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<!--ALERT-->
-@if (TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey] != null)
-{
-   <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <i class="bi bi-check-circle-fill"></i>&nbsp;@TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey]
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-   </div>
-}
-
 <div class="row">
    <div class="col-lg-8 offset-lg-3">
+
+      <!--ALERT-->
+      @if (TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey] != null)
+      {
+         <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill"></i>&nbsp;@TempData[ExpenseTracker.Utilities.Constants.MessageConstants.MessageKey]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+         </div>
+      }
 
       <!--PAGE TITLE-->
       <h4>Expense Details</h4>
