@@ -2,6 +2,7 @@
 using ExpenseTracker.Infrastructure.Contracts;
 using ExpenseTracker.Utilities.Constants;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseTracker.Api.Controllers
 {
@@ -48,7 +49,8 @@ namespace ExpenseTracker.Api.Controllers
       {
          try
          {
-            var expenses = await context.ExpenseRepository.GetAllActiveExpenses();
+            var expenses = await context.ExpenseRepository.GetAll("ExpenseCategory").ToListAsync();
+
             return Ok(expenses);
          }
          catch (Exception ex)

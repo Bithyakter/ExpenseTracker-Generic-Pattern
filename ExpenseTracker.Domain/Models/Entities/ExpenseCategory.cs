@@ -36,6 +36,6 @@ namespace ExpenseTracker.Domain.Models.Entities
       /// <summary>
       /// Expences of an expense category.
       /// </summary>
-      public virtual IEnumerable<Expense> Expenses { get; set; }
+      //public virtual IEnumerable<Expense> Expenses { get; set; }
    }
 }
