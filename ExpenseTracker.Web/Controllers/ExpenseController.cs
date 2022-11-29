@@ -41,8 +41,8 @@ namespace ExpenseTracker.Web.Controllers
             var outcome = await httpHelper.ReadSingleResource("expense-tracker-api/expense/key/" + id.ToString());
 
             HttpHelper<ExpenseCategory> httpHelper1 = new HttpHelper<ExpenseCategory>();
-            var category = outcome.Entity.ExpenseCatagoryID.ToString();        
-            
+            var category = outcome.Entity.ExpenseCatagoryID.ToString();
+
             var categories = await httpHelper1.ReadSingleResource("expense-tracker-api/category/key/" + category);
             outcome.Entity.ExpenseCategory = category == null ? new ExpenseCategory() : categories.Entity;
 
